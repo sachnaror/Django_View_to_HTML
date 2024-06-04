@@ -1,3 +1,4 @@
+import requests
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -7,12 +8,18 @@ def index(request):
 
 
 def my_view(request):
-    variable1 = "Hello"
-    variable2 = "Django"
-    variable3 = ["orange", "mango", "lemon"]
+    api_url = 'https://restcountries.com/v3.1/all'
 
-    return render(request, 'myapp/my_template.html', {
-        'variable1': variable1,
-        'variable2': variable2,
-        'variable3': variable3,
-    })
+    # Make a request to the API and get the response
+    response = requests.get(api_url)
+
+    # Check if the request was successful (status code 200)
+    if response.status_code == 200:
+        # Convert the response to a format that Python can understand
+        countries = response.json()
+    else:
+        # Handle the case where the request was not successful
+        countries = []  # Provide an empty list if there's an issue
+
+    # Pass the retrieved data to the template
+    return render(request, 'myapp/my_template.html', {'countries': countries})
