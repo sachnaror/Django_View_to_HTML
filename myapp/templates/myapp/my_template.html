@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Template Example</title>
+</head>
+<body>
+
+
+
+    <ul>
+        {% if variable2 == "Django" %}
+            <li>This is a special message for Django!</li>
+        {% else %}
+            <li>{{ variable2 }}</li>
+        {% endif %}
+    </ul>
+
+</body>
+</html>
